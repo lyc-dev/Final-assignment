@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>默认封面图片生成器</title>
+  <style>
+    body {
+      background: #fff;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .album-cover {
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, #2962ff, #0095ff);
+      border-radius: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+    .album-cover::before {
+      content: "♫";
+      font-size: 120px;
+      opacity: 0.7;
+    }
+    .instructions {
+      position: fixed;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="album-cover"></div>
+  <div class="instructions">
+    <p>使用说明: 请右键点击上面的图像 → 选择"另存为图片" → 保存为 default.png</p>
+  </div>
+</body>
+</html> 

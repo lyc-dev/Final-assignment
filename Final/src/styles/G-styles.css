@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    /* background-color: #f0f0f0; */
+    background-color: transparent;
+}
+
+#graph-container {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+.node {
+    cursor: pointer;
+}
+
+.node circle {
+    stroke: #fff;
+    stroke-width: 2px;
+}
+
+.node text {
+    font-size: 14px;
+    fill: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.link {
+    stroke: rgba(255, 255, 255, 0.6);
+    stroke-opacity: 0.6;
+    stroke-width: 2px;
+}
+
+.link-label {
+    fill: #ffffff;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.tooltip {
+    position: absolute;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    pointer-events: none;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.highlight-circle {
+    stroke: gold !important;
+    fill: none;
+    pointer-events: none;
+}

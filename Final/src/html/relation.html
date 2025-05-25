@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人物关系图</title>
+    <link rel="stylesheet" href="src/styles/style.css">
+    <!-- 依赖引入顺序很重要 -->
+    <script src="rule/jquery.js"></script>
+    <script src="D3/d3.v7.min.js"></script>
+</head>
+<body>
+<section class="section-card glass" style="margin-bottom:18px;">
+        <a href="#home" class="back-btn" style="margin-top: 35px;">← 返回首页</a>
+        <h2 style="text-align: center;">人物关系图</h2>
+        <!-- <div style="color:#eaf6ff;opacity:0.8;font-size:1rem;margin-bottom:10px;">可视化展示项目/学业人物关系</div> -->
+    </section>
+    <div id="graph-container" style="width:100vw;height:calc(100vh - 120px);"></div>
+    <style>
+        .node {
+            cursor: pointer;
+        }
+        .link {
+            stroke: #fff;
+            stroke-width: 2;
+            opacity: 0.6;
+        }
+        .link-label {
+            fill: #eaf6ff;
+            font-size: 14px;
+        }
+        .node text {
+            fill: #eaf6ff;
+            font-size: 14px;
+        }
+        .tooltip {
+            position: absolute;
+            padding: 8px;
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 8px;
+            pointer-events: none;
+            color: #fff;
+            z-index: 1000;
+        }
+    </style>
+    <script type="module">
+        import { initForceGraph } from 'src/visualizations/components/force.js';
+        window.addEventListener('DOMContentLoaded', () => {
+            try {
+                initForceGraph();
+            } catch (error) {
+                console.error('Error initializing force graph:', error);
+            }
+        });
+    </script>
+</body>
+</html>

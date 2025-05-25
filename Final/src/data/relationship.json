@@ -1,0 +1,72 @@
+[
+  {
+    "name": "lyc",
+    "label": "廖云川",
+    "image": "../image/lyc.jpg",
+    "desc": "重庆理工大学电气与电气工程学院2022级电子1班学生"
+  },
+  {
+    "name": "ymk",
+    "label": "叶马可",
+    "image": "../image/ymk.jpg",
+    "desc": "重庆理工大学电气与电气工程学院2022级电子1班学生",
+    "relation": "室友",
+    "target": "lyc"
+  },
+  {
+    "name": "ly",
+    "label": "刘烨",
+    "image": "../image/ly.jpg",
+    "desc": "重庆理工大学电气与电气工程学院2022级电子1班学生",
+    "relation": "室友",
+    "target": "lyc"
+  },
+  {
+    "name": "xqj",
+    "label": "熊秋锦",
+    "image": "../image/xqj.jpg",
+    "desc": "重庆理工大学电气与电气工程学院2022级电子1班学生",
+    "relation": "室友",
+    "target": "lyc"
+  },
+  {
+    "name": "wpr",
+    "label": "王培荣",
+    "image": "../image/wpr.jpg",
+    "desc": "重庆理工大学电气与电气工程学院数据可视化教师",
+    "relation": "老师",
+    "target": "lyc"
+  },
+  {
+    "name": "lr",
+    "label": "李瑞",
+    "image": "../image/lr.jpg",
+    "desc": "重庆理工大学电气与电气工程学院2022级电子4班学生",
+    "relation": "同学",
+    "target": "lyc"
+  },
+  {
+    "name": "zcj",
+    "label": "邹承江",
+    "image": "../image/zcj.jpg",
+    "desc": "重庆理工大学电气与电气工程学院2023级电子4班学生",
+    "relation": "直系学弟",
+    "target": "lyc"
+  },
+  {
+    "name": "hxy",
+    "label": "胡新宇",
+    "image": "../image/hxy.jpg",
+    "desc": "重庆理工大学电气与电气工程学院党委书记",
+    "relation": "班导师",
+    "target": "lyc"
+  },
+  {
+    "name": "hb",
+    "label": "胡斌",
+    "image": "../image/hb.jpg",
+    "desc": "重庆理工大学电气与电气工程学院2022级通信3班胡斌",
+    "relation": "同学",
+    "target": "lyc"
+  }
+] 

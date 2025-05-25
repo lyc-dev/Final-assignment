@@ -1,0 +1,420 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+#visualization-container {
+    width: 100vw;
+    height: calc(100vh - 80px);
+    background: transparent;
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.4s ease, transform 0.5s ease;
+    position: absolute;
+    top: 160px;
+    left: 0;
+    right: 0;
+    z-index: 5;
+}
+#album-container {
+    width: 100vw;
+    height: calc(100vh - 80px);
+    background: transparent;
+    position: absolute;
+    top: 160px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    padding-top: 30px;
+    overflow-y: auto;
+    z-index: 10;
+    opacity: 0;
+    transform: translateX(100vw);
+    transition: opacity 0.4s ease, transform 0.5s ease;
+}
+.album-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.album-cover-container {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    margin-bottom: 30px;
+    border-radius: 50%;
+    z-index: 1;
+}
+.album-glow {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 85%, transparent 100%);
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0.6;
+    pointer-events: none;
+}
+.album-viz-canvas {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 450px;
+    height: 450px;
+    z-index: -1;
+    pointer-events: none;
+}
+.album-cover {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 20px rgba(126, 203, 255, 0.6);
+    animation: rotate 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    position: relative;
+    z-index: 2;
+}
+.lyrics-container {
+    width: 100%;
+    max-height: 400px;
+    min-height: 200px;
+    overflow-y: auto;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(126, 203, 255, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+}
+.lyrics-item {
+    padding: 8px 0;
+    margin: 4px 0;
+    font-size: 18px;
+    color: #eaf6ff;
+    text-align: center;
+    opacity: 0.7;
+    transition: all 0.15s ease;
+    border-radius: 4px;
+}
+.lyrics-item[data-time] {
+    position: relative;
+    cursor: pointer;
+}
+.lyrics-item[data-time]:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: scale(1.01);
+    opacity: 0.9;
+}
+.lyrics-item[data-time]:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: scale(0.99);
+}
+.lyrics-item.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.02);
+    font-size: 22px;
+    font-weight: bold;
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(126, 203, 255, 0.8);
+    transition-property: background-color, transform, opacity, font-size;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-out;
+}
+/* 双语歌词样式 */
+.lyrics-original {
+    font-size: 18px;
+    color: #aee6ff;
+    margin-bottom: 2px;
+}
+.lyrics-translation {
+    font-size: 16px;
+    color: #eaf6ff;
+    opacity: 0.85;
+    margin-top: 2px;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+.lyrics-item.active .lyrics-original {
+    font-size: 20px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(126, 203, 255, 0.8);
+}
+.lyrics-item.active .lyrics-translation {
+    font-size: 18px;
+    opacity: 1;
+    text-shadow: 0 0 8px rgba(126, 203, 255, 0.6);
+}
+.song-info {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #eaf6ff;
+}
+.song-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+.song-info p {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+.nav-buttons {
+    position: fixed;
+    top: 50%;
+    margin-top: -30px;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    padding: 0 20px;
+}
+.nav-button {
+    background: rgba(41, 98, 255, 0.8);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 28px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.3s ease;
+    pointer-events: auto;
+    margin: 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 200;
+    outline: none;
+}
+.nav-button:hover {
+    transform: scale(1.1) !important;
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 25px rgba(126, 203, 255, 0.7);
+}
+.nav-button:active {
+    transform: scale(0.95) !important;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    background-color: rgba(41, 98, 255, 1);
+    transition: transform 0.1s ease, background-color 0.1s ease;
+}
+.nav-button:focus {
+    outline: none;
+}
+/* 按钮提示 */
+.nav-button::after {
+    content: "切换视图";
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(41, 98, 255, 0.8);
+    color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+}
+.nav-button:hover::after {
+    opacity: 1;
+}
+.no-lyrics-message {
+    font-size: 20px;
+    color: #eaf6ff;
+    text-align: center;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.fullscreen-section {
+    margin: 0;
+    padding: 10px 20px;
+    background: rgba(30, 60, 120, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+/* 自定义滚动条 */
+.lyrics-container::-webkit-scrollbar {
+    width: 6px;
+}
+.lyrics-container::-webkit-scrollbar-track {
+    background: rgba(41, 98, 255, 0.1);
+    border-radius: 3px;
+}
+.lyrics-container::-webkit-scrollbar-thumb {
+    background: rgba(126, 203, 255, 0.5);
+    border-radius: 3px;
+}
+/* 当图片正在加载时的样式 */
+.album-cover.loading {
+    opacity: 0.6;
+}
+/* 当专辑视图激活时，可视化容器的淡出效果 */
+#visualization-container.hiding {
+    opacity: 0;
+    transform: translateX(-100vw);
+}
+/* 专辑容器的淡入效果 */
+#album-container.showing {
+    opacity: 1;
+    transform: translateX(0);
+}
+#album-container.hiding {
+    opacity: 0;
+    transform: translateX(100vw);
+}
+#visualization-container.showing {
+    opacity: 1;
+    transform: translateX(0);
+}
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+@keyframes glow-pulse {
+    0% {
+        opacity: 0.6;
+        transform: scale(0.9);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 0.6;
+        transform: scale(0.9);
+    }
+}
+
+/* 新增：专辑视图左右布局样式 */
+/* #album-container { */
+    /* 如果之前没有设置 display: flex，确保它能正确展示子元素 album-content-grid */
+    /* display: flex; */ /* 这行可能不需要，取决于现有样式 */
+    /* align-items: center; */ /* 这行可能不需要，取决于现有样式 */
+    /* justify-content: center; */ /* 这行可能不需要，取决于现有样式 */
+/* } */
+
+.album-content-grid {
+    display: flex;
+    align-items: flex-start; /* 顶部对齐 */
+    justify-content: space-between; /* 两端对齐，中间留空 */
+    width: 100%;
+    max-width: 1200px; /* 限制最大宽度，使其在大屏幕上不会过宽 */
+    margin: 0 auto; /* 水平居中 */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.album-left {
+    flex-basis: 45%; /* 左侧占据大约45%的宽度 */
+    display: flex;
+    justify-content: flex-start; /* 由 center 修改为 flex-start */
+    align-items: center;
+    padding-right: 20px; /* 与右侧内容保持一些间距 */
+    box-sizing: border-box;
+}
+
+/* 放大专辑封面容器 - 保持圆形 */
+.album-cover-container {
+    /* 此规则会覆盖原始 .album-cover-container 中部分属性以适应新布局 */
+    width: 100%;                /* 宽度相对于 .album-left */
+    max-width: 350px;           /* 这是新的、放大的尺寸，你可以根据需要调整 */
+    height: auto;               /* 高度将由 aspect-ratio 决定 */
+    aspect-ratio: 1 / 1;        /* 确保容器是正方形，这样 border-radius: 50% 才能形成完美的圆形 */
+    border-radius: 50%;         /* 使容器本身也变为圆形，与原始样式一致 */
+    
+    position: relative;         /* 与原始样式一致 */
+    z-index: 1;                 /* 与原始样式一致, 确保 glow/canvas 的正确层叠 */
+    margin-bottom: 0;           /* 覆盖原始的 margin-bottom，因为新的 flex 布局会处理间距 */
+    margin-top: 100px; /* 新增：向下移动px (你可以调整这个数值) */
+                                /* 或者依赖 .album-left 和 .album-content-grid 中的 padding */
+    
+    display: flex;              /* 新增: 用于对齐内部图片 */
+    align-items: center;        /* 新增: 用于对齐内部图片 */
+    justify-content: center;    /* 新增: 用于对齐内部图片 */
+}
+
+.album-cover-container .album-cover {
+    /* 此规则会覆盖原始 .album-cover 中部分属性以适应新布局和尺寸 */
+    width: 100%;
+    height: 100%;               /* 图片填充整个容器 */
+    border-radius: 50%;         /* 关键修复: 使图片本身也变为圆形 */
+    object-fit: cover;          /* 确保图片覆盖整个区域，保持其宽高比，必要时裁剪 (与原始样式一致) */
+    
+    /* 像 'box-shadow' 和 'animation' 这样的属性，在原始的 '.album-cover' 规则中已经定义。
+       由于这个新规则更具体，但只重新定义了上面的属性，
+       所以原始规则中的其他属性（如阴影和旋转动画）应该仍然会应用。
+       除非需要更改它们，否则无需在此重新声明。 */
+}
+
+
+.album-right {
+    flex-basis: 55%; /* 右侧占据大约55%的宽度 */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 由 flex-start 修改为 center */
+    box-sizing: border-box;
+}
+
+.song-info {
+    width: 100%; /* 或者可以设置为 auto 或一个具体的 max-width 来配合居中 */
+    text-align: center; /* 由 left 修改为 center */
+    margin-bottom: 15px; /* 与歌词区域的间距 */
+}
+
+#song-title {
+    font-size: 1.5em; /* 较大的字体 */
+    margin-bottom: 5px;
+}
+
+#song-artist {
+    font-size: 1.2em;
+    color: #ccc; /* 稍浅的颜色 */
+}
+
+.lyrics-container {
+    width: 100%; /* 占满右侧宽度 */
+    max-height: 400px; /* 例如：限制最大高度，超出则滚动 */
+    overflow-y: auto;
+    text-align: left; /* 歌词文本左对齐 */
+    /* 之前通过JS设置的样式，这里可以保留或移除，因为JS会覆盖 */
+    /* background-color: transparent; */
+    /* border: none; */
+    /* padding: 0; */
+}
+
+/* 调整歌词项的样式，如果需要 */
+.lyrics-item {
+    padding: 5px 0; /* 给每行歌词一些垂直间距 */
+    font-size: 1.5em;
+}
+
+.lyrics-item.active {
+    font-weight: bold;
+    color: #fff; /* 高亮颜色，可以自定义 */
+    font-size: 1.5em
+} 

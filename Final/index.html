@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="view-transition" content="same-origin">
+  <title>廖云川-个人简历</title>
+  <link rel="stylesheet" href="/Final/src/styles/style.css">
+  <!-- 核心依赖 -->
+  <script src="rule/jquery.js"></script>
+  <script src="rule/echarts.min.js"></script>
+  <script src="rule/bmap.min.js"></script>
+  <script src="https://api.map.baidu.com/api?v=2.0&ak=lgj1icmXqYZaTf7V9WOs7Hj1FspANFSE"></script>
+  <script src="D3/d3.v7.min.js"></script>
+  <script src="/Final/src/audio/music-viz.js"></script>
+</head>
+<body>
+  <div class="mini-visualizer" id="mini-visualizer"></div>
+  <iframe src="/Final/src/html/music_player.html" id="global-music-player" scrolling="no" style="position:fixed;right:0px;bottom:0px;width:320px;height:90px;border:none;z-index:9999;background:transparent;overflow:hidden;box-shadow:none;" allow="autoplay"></iframe>
+
+  <!-- 主体内容 -->
+  <div id="spa-content">
+    <div class="container">
+      <!-- 个人信息区 -->
+      <section class="profile-card glass">
+        <div class="avatar"></div>
+        <div class="profile-info">
+          <h1>廖云川</h1>
+          <p> 本科 | 群众 | 21岁 | 男</p>
+          <p>所在地：重庆市 | 籍贯：中国</p>
+          <p>邮箱：602542933@qq.com | 电话：+86 19823380172</p>
+        </div>
+      </section>
+
+      <!-- 求职意向 -->
+      <section class="section-card glass">
+        <h2>求职意向</h2>
+        <ul>
+          <li>职位：嵌入式软件工程师</li>
+          <li>意向城市：重庆</li>
+          <li>期望薪资：2-7k</li>
+          <li>到岗时间：随时到岗</li>
+        </ul>
+      </section>
+
+      <!-- 教育经历 -->
+      <section class="section-card glass edu-map-bg" style="position:relative;overflow:hidden;">
+        <h2>教育经历</h2>
+        <ul>
+          <li>重庆理工大学 · 电子信息工程 本科</li>
+          <li>2022.9 - 2025.12</li>
+          <li>绩点：3.5 | 成绩排名：前15%</li>
+        </ul>
+      </section>
+
+      <!-- 项目经历 -->
+      <section class="section-card glass">
+        <h2>项目经历</h2>
+        <div class="project">
+          <h3>深度学习（2024.12 - 2025.1）</h3>
+          <p>负责基于YOLOv5-Lite算法花朵分类识别项目，模型部署与优化，数据可视化等。</p>
+        </div>
+        <div class="project">
+          <h3>自动行驶小车（2024.7 - 2024.9）</h3>
+          <p>负责电路设计、模块调试、报告编写等，团队开发自动行驶小车。</p>
+        </div>
+        <div class="project">
+          <h3>电路设计化与实施（2023.10 - 2023.12）</h3>
+          <p>参与项目选题、方案设计、调试与测试，取得显著成果。</p>
+        </div>
+      </section>
+
+      <!-- 荣誉奖项 -->
+      <section class="section-card glass">
+        <h2>荣誉奖项</h2>
+        <ul>
+          <li>2024.9 全国大学生电子设计竞赛省二等奖</li>
+          <li>2023.12 无线电杯竞赛二等奖</li>
+        </ul>
+      </section>
+
+      <!-- 个人技能 -->
+      <section class="section-card glass">
+        <h2>个人技能</h2>
+        <ul>
+          <li>办公技能：熟练使用Word、PPT等办公软件，《MS office》计算机二级证书</li>
+          <li>英语：英语CET-4</li>
+          <li>驾驶证：C1机动车驾驶证</li>
+        </ul>
+      </section>
+
+      <!-- 模块入口卡片区 -->
+      <section class="section-card glass" id="module-entry">
+        <h2>数据可视化模块入口</h2>
+        <div class="card-grid">
+          <a class="module-card" href="#music">
+            <div class="card-title">音乐可视化</div>
+            <div class="card-desc">背景音乐与可视化动画互动</div>
+          </a>
+          <a class="module-card" href="#pie">
+            <div class="card-title">课程得分饼图</div>
+            <div class="card-desc">可视化展示主要课程成绩分布</div>
+          </a>
+          <a class="module-card" href="#map">
+            <div class="card-title">重庆地图定位</div>
+            <div class="card-desc">展示重庆地理位置与相关信息</div>
+          </a>
+          <a class="module-card" href="#relation">
+            <div class="card-title">人物关系图</div>
+            <div class="card-desc">可视化展示项目/学业人物关系</div>
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- 教育经历右侧地图背景，移出SPA内容区，始终显示 -->
+  <div id="edu-map-bg-fixed" style="position:absolute;right:calc(50% - 380px);top:395px;width:200px;height:153px;z-index:1;opacity: 0.2;;pointer-events:none;"></div>
+
+  <!-- 模块化脚本 -->
+  <script type="module" src="/Final/src/core/spa.js"></script>
+  <script type="module">
+    import { renderEduMapBgFixed } from '/Final/src/visualizations/components/map.js';
+    
+    // 确保SPA内容初始化后再进行其他操作
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 渲染背景小地图
+      renderEduMapBgFixed();
+      
+      // 检查当前页面是否是首页，非首页则隐藏地图
+      const checkAndSetMapVisibility = () => {
+        const hash = window.location.hash;
+        const eduMapBg = document.getElementById('edu-map-bg-fixed');
+        if (eduMapBg) {
+          if (hash && hash !== '#home') {
+            eduMapBg.style.display = 'none';
+          } else {
+            eduMapBg.style.display = 'block';
+          }
+        }
+      };
+      
+      // 页面加载时立即检查一次
+      checkAndSetMapVisibility();
+      
+      // 等待SPA初始化完成
+      if (window.spaInitialized) {
+        await initMiniVisualizer();
+      } else {
+        // 如果SPA尚未初始化完成，监听自定义事件
+        window.addEventListener('spaInitialized', async () => {
+          await initMiniVisualizer();
+          // SPA初始化完成后再次检查
+          checkAndSetMapVisibility();
+        });
+      }
+
+      // 添加页面交互监听，解决自动播放问题
+      const handleUserInteraction = async () => {
+        const audioPlayer = document.getElementById('global-music-player');
+        if (audioPlayer) {
+          try {
+            // 等待iframe加载完成
+            if (audioPlayer.contentWindow.document.readyState !== 'complete') {
+              await new Promise(resolve => {
+                audioPlayer.addEventListener('load', resolve, { once: true });
+              });
+            }
+            
+            const audioElement = audioPlayer.contentWindow.document.querySelector('audio');
+            if (audioElement && audioElement.paused) {
+              // 尝试播放音频
+              const playPromise = audioElement.play();
+              if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                  console.log('自动播放失败，等待用户下一次交互', error);
+                });
+              }
+            }
+          } catch (error) {
+            console.error('交互后播放音频失败:', error);
+          }
+        }
+        
+        // 移除事件监听器，避免重复触发
+        document.removeEventListener('click', handleUserInteraction);
+        document.removeEventListener('keydown', handleUserInteraction);
+      };
+      
+      // 添加用户交互事件监听
+      document.addEventListener('click', handleUserInteraction);
+      document.addEventListener('keydown', handleUserInteraction);
+    });
+    
+    async function initMiniVisualizer() {
+      try {
+        const audioPlayer = document.getElementById('global-music-player');
+        if (!audioPlayer) return;
+
+        // 等待 iframe 加载完成
+        await new Promise(resolve => {
+          if (audioPlayer.contentWindow.document.readyState === 'complete') {
+            resolve();
+          } else {
+            audioPlayer.addEventListener('load', resolve);
+          }
+        });
+
+        const audioElement = audioPlayer.contentWindow.document.querySelector('audio');
+        if (!audioElement) {
+          console.error('Audio element not found in iframe');
+          return;
+        }
+
+        // 确保音频元素已准备好
+        await new Promise(resolve => {
+          if (audioElement.readyState >= 2) {
+            resolve();
+          } else {
+            audioElement.addEventListener('loadeddata', resolve, { once: true });
+          }
+        });
+
+        if (!window.miniVisualizer) {
+          window.miniVisualizer = new AudioVisualizer('mini-visualizer', true);
+          await window.miniVisualizer.init(audioElement);
+          
+          // 监听音乐页面切换事件
+          audioElement.addEventListener('play', () => {
+            if (window.miniVisualizer) {
+              window.miniVisualizer.resume();
+            }
+          });
+          
+          audioElement.addEventListener('pause', () => {
+            if (window.miniVisualizer) {
+              window.miniVisualizer.pause();
+            }
+          });
+        }
+      } catch (error) {
+        console.error('Error in initMiniVisualizer:', error);
+      }
+    }
+  </script>
+</body>
+</html>

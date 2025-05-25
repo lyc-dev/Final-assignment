@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Player</title>
+  <link rel="stylesheet" href="../../src/styles/music-player.css">
+</head>
+<body>
+  <div id="music-container">
+    <div class="song-controls">
+      <button id="prevSong">&lt;</button>
+      <div class="current-song" id="currentSong">不要让梦醒来</div>
+      <button id="nextSong">&gt;</button>
+    </div>
+    <div class="audio-wrapper">
+      <div class="progress-container" id="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <div class="player-controls">
+        <button class="play-pause" id="play-pause">▶</button>
+        <div class="time" id="time">0:00 / 3:37</div>
+        <div class="volume-container">
+          <button class="volume-btn" id="volume-btn">🔊</button>
+          <div class="volume-slider" id="volume-slider">
+            <div class="volume-percentage" id="volume-percentage"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <audio id="bgMusic" src="../../music/不要让梦醒来.mp3" preload="auto" crossorigin="anonymous"></audio>
+  </div>
+  <script src="../../src/audio/music-player-controller.js"></script>
+</body>
+</html>

@@ -1,0 +1,670 @@
+/* 设置所有元素、伪元素的盒模型为border-box */
+*, *::before, *::after {
+  box-sizing: border-box; /* 设置所有元素的盒模型为border-box，使得宽度和高度包含边框和内边距 */
+}
+
+/* html 元素基础样式设置 */
+html {
+  width: 100%; /* 设置html元素宽度为100% */
+  max-width: 100vw; /* 设置html元素最大宽度为视口宽度 */
+  overflow-x: hidden; /* 隐藏横向滚动条 */
+}
+
+/* body 元素基础样式设置 */
+body {
+  margin: 0; /* 移除外边距 */
+  padding: 0; /* 移除内边距 */
+  min-height: 100vh; /* 设置最小高度为视口高度 */
+  width: 100%; /* 设置宽度为100% */
+  max-width: 100vw; /* 设置最大宽度为视口宽度 */
+  overflow-x: hidden; /* 隐藏横向滚动条 */
+  box-sizing: border-box; /* 设置盒模型为border-box */
+  font-family: 'Segoe UI', 'Microsoft YaHei', Arial, sans-serif; /* 设置字体家族 */
+  background: url('../../image/catgirl.jpg') no-repeat center center fixed; /* 设置背景图片 */
+  background-size: cover; /* 背景图片覆盖整个元素 */
+  position: relative; /* 设置相对定位 */
+  font-size: 14px; /* 设置字体大小 */
+}
+
+/* 首页专用样式 */
+body.page-home {
+  min-height: 100vh; /* 设置高度为视口高度 */
+  overflow: hidden; /* 隐藏所有滚动条 */
+  font-size: 14px; /* 设置字体大小为1px */
+}
+
+/* 饼图页面专用样式 */
+body.page-pie {
+  min-height: 100vh; /* 设置最小高度为视口高度 */
+  overflow-y: auto; /* 允许纵向滚动 */
+  font-size: 14px; /* 设置字体大小 */
+}
+
+/* 地图页面专用样式 */
+body.page-map {
+  min-height: 100vh; /* 设置最小高度为视口高度 */
+  overflow-y: auto; /* 允许纵向滚动 */
+  font-size: 14px; /* 设置字体大小 */
+}
+
+/* 关系图页面专用样式 */
+body.page-relation {
+  min-height: 100vh; /* 设置最小高度为视口高度 */
+  overflow-y: auto; /* 允许纵向滚动 */
+  font-size: 14px; /* 设置字体大小 */
+}
+
+/* 音乐页面专用样式 */
+body.page-music {
+  min-height: 100vh; /* 设置最小高度为视口高度 */
+  overflow-y: auto; /* 允许纵向滚动 */
+  font-size: 14px; /* 设置字体大小 */
+}
+
+/* 首页容器样式 */
+body.page-home .container {
+  max-width: 800px; /* 设置最大宽度 */
+  width: calc(100% - 30px); /* 考虑内边距的宽度计算 */
+  min-height: 100vh; /* 设置高度为视口高度 */
+  margin: 0 auto; /* 水平居中 */
+  padding: 50px 15px; /* 设置内边距 */
+  display: flex; /* 设置为flex布局 */
+  flex-direction: column; /* 设置主轴为纵向 */
+  gap: 3px; /* 设置子元素间距 */
+  overflow: hidden; /* 隐藏滚动条 */
+  box-sizing: border-box; /* 设置盒模型为border-box */
+  position: relative; /* 设置相对定位 */
+  left: 0;
+  right: 0; /* 设置右偏移 */
+}
+
+/* 饼图页面容器样式 */
+body.page-pie .container {
+  max-width: 900px; /* 设置最大宽度 */
+  margin: 0 auto; /* 水平居中 */
+  padding: 20px 10px; /* 设置内边距 */
+  display: flex; /* 设置为flex布局 */
+  flex-direction: column; /* 设置主轴为纵向 */
+  gap: 16px; /* 设置子元素间距 */
+  overflow: visible; /* 显示滚动条 */
+}
+
+/* 地图页面容器样式 */
+body.page-map .container {
+  max-width: 900px; /* 设置最大宽度 */
+  margin: 0 auto; /* 水平居中 */
+  padding: 20px 10px; /* 设置内边距 */
+  display: flex; /* 设置为flex布局 */
+  flex-direction: column; /* 设置主轴为纵向 */
+  gap: 16px; /* 设置子元素间距 */
+  overflow: visible; /* 显示滚动条 */
+}
+
+/* 关系图页面容器样式 */
+body.page-relation .container {
+  max-width: 900px; /* 设置最大宽度 */
+  margin: 0 auto; /* 水平居中 */
+  padding: 20px 10px; /* 设置内边距 */
+  display: flex; /* 设置为flex布局 */
+  flex-direction: column; /* 设置主轴为纵向 */
+  gap: 16px; /* 设置子元素间距 */
+  overflow: visible; /* 显示滚动条 */
+}
+
+/* 音乐页面容器样式 */
+body.page-music .container {
+  max-width: 900px; /* 设置最大宽度 */
+  margin: 0 auto; /* 水平居中 */
+  padding: 20px 10px; /* 设置内边距 */
+  display: flex; /* 设置为flex布局 */
+  flex-direction: column;
+  gap: 16px; /* 设置子元素间距 */
+  overflow: visible; /* 显示滚动条 */
+}
+
+/* 首页卡片样式 */
+body.page-home .section-card {
+  padding: 0px 10px; /* 设置内边距 */
+  overflow-y: auto; /* 允许纵向滚动 */
+  max-height: calc((100vh - 150px) / 4.4); /* 设置最大高度 */
+}
+
+/* 饼图页面卡片样式 */
+body.page-pie .section-card {
+  padding: 16px 18px; /* 设置内边距 */
+  overflow-y: auto;
+}
+
+/* 地图页面卡片样式 */
+body.page-map .section-card {
+  padding: 16px 18px;
+  overflow-y: auto;
+}
+
+/* 关系图页面卡片样式 */
+body.page-relation .section-card {
+  padding: 16px 18px;
+  overflow-y: auto;
+}
+
+/* 音乐页面卡片样式 */
+body.page-music .section-card {
+  padding: 16px 18px;
+  overflow-y: auto;
+}
+
+/* 玻璃拟态效果样式 */
+.glass {
+  background: rgba(30, 60, 120, 0.45); /* 半透明背景色 */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18); /* 添加阴影效果 */
+  backdrop-filter: blur(8px); /* 背景模糊效果 */
+  -webkit-backdrop-filter: blur(8px); /* Safari浏览器背景模糊效果 */
+  border-radius: 10px; /* 圆角设置 */
+  border: 1.5px solid rgba(255, 255, 255, 0.18); /* 边框设置 */
+}
+
+/* 个人资料卡片样式 */
+.profile-card {
+  display: flex; /* 弹性布局 */
+  align-items: center; /* 垂直居中对齐 */
+  padding: 17px 10px; /* 内边距设置 */
+  gap: 15px; /* 元素间距 */
+}
+
+/* 头像样式 */
+.avatar {
+  width: 70px; /* 宽度设置 */
+  height: 80px; /* 高度设置 */
+  border-radius: 50%; /* 圆形边框 */
+  background: url('../../image/photo.jpg') no-repeat center center/cover, #fff; /* 背景图片设置 */
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18); /* 阴影效果 */
+  border: 2px solid #7ecbff; /* 边框设置 */
+}
+
+/* 个人信息文本样式 */
+.profile-info h1 {
+  margin: 0 0 8px 0; /* 外边距设置 */
+  color: #eaf6ff; /* 文字颜色 */
+  font-size: 1.1rem; /* 字体大小 */
+  letter-spacing: 2px; /* 字间距 */
+}
+
+.profile-info p {
+  margin: 3px 0;
+  color: #cbe6ff;
+  font-size: 0.9rem;
+}
+
+/* 各页面标题样式 */
+.section-card h2 {
+  color: #aee6ff; /* 文字颜色 */
+  margin-bottom: 3px; /* 下外边距 */
+  font-size: 0.95rem; /* 字体大小 */
+  letter-spacing: 1px; /* 字间距 */
+}
+
+/* 项目列表样式 */
+.section-card ul {
+  margin: 0; /* 外边距为0 */
+  padding-left: 18px; /* 左内边距 */
+  color: #eaf6ff; /* 文字颜色 */
+  font-size: 0.8rem; /* 字体大小 */
+  line-height: 1.4; /* 行高 */
+}
+
+/* 项目标题样式 */
+.project h3 {
+  color: #7ecbff; /* 文字颜色 */
+  margin: 5px 0 1px 0; /* 外边距 */
+  font-size: 0.8rem; /* 字体大小 */
+}
+
+/* 项目描述样式 */
+.project p {
+  color: #eaf6ff; /* 文字颜色 */
+  margin: 1px 0 5px 0; /* 外边距 */
+  font-size: 0.78rem; /* 字体大小 */
+}
+
+/* 可视化区域样式 */
+#visualization-area {
+  display: flex; /* 使用弹性布局 */
+  flex-direction: column; /* 主轴方向为纵向 */
+  gap: 16px; /* 子元素间距 */
+}
+
+/* 可视化块样式 */
+.viz-block {
+  min-height: 120px; /* 最小高度 */
+  background: rgba(255,255,255,0.08); /* 背景色 */
+  border-radius: 12px; /* 圆角设置 */
+  margin-bottom: 8px; /* 下外边距 */
+  color: #b3e5ff; /* 文字颜色 */
+  display: flex; /* 使用弹性布局 */
+  align-items: center; /* 垂直居中对齐 */
+  justify-content: center; /* 水平居中对齐 */
+  font-size: 1.1rem; /* 字体大小 */
+  font-weight: 500; /* 字体粗细 */
+  letter-spacing: 1px; /* 字间距 */
+}
+
+/* 响应式布局：最大宽度600px时 */
+@media (max-width: 600px) {
+  body {
+    font-size: 12px; /* 减小字体大小 */
+  }
+  .container {
+    padding: 10px 2px; /* 调整内边距 */
+  }
+  .profile-card {
+    flex-direction: column; /* 改为纵向排列 */
+    gap: 16px; /* 元素间距 */
+    padding: 18px 8px; /* 内边距 */
+  }
+  .avatar {
+    width: 80px; /* 头像宽度 */
+    height: 80px; /* 头像高度 */
+  }
+  .section-card {
+    padding: 12px 6px; /* 卡片内边距 */
+  }
+}
+
+/* 隐藏音频控件 */
+#audio, audio {
+  display: none;
+}
+
+/* 卡片网格布局 */
+.card-grid {
+  display: grid; /* 使用网格布局 */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* 自适应列数 */
+  gap: 3px; /* 网格间距 */
+  margin-top: 1px; /* 上外边距 */
+  overflow: hidden; /* 隐藏溢出内容 */
+  max-height: calc(100vh - 100px); /* 最大高度 */
+}
+
+/* 模块卡片样式 */
+.module-card {
+  display: flex; /* 使用弹性布局 */
+  flex-direction: column; /* 主轴方向为纵向 */
+  align-items: flex-start; /* 左对齐 */
+  justify-content: center; /* 垂直居中对齐 */
+  background: rgba(30, 60, 120, 0.55); /* 半透明背景色 */
+  border-radius: 9px; /* 圆角设置 */
+  box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.10); /* 阴影效果 */
+  border: 1px solid rgba(255,255,255,0.13); /* 边框设置 */
+  padding: 12px 10px 10px 10px; /* 内边距 */
+  color: #eaf6ff; /* 文字颜色 */
+  text-decoration: none; /* 去除链接下划线 */
+  transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s; /* 动效 */
+  cursor: pointer; /* 鼠标指针样式 */
+  position: relative; /* 相对定位 */
+  overflow: hidden; /* 隐藏溢出内容 */
+}
+
+/* 模块卡片悬停效果 */
+.module-card:hover {
+  transform: translateY(-0px) scale(1.04); /* 上移并放大 */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18); /* 增强阴影效果 */
+  background: rgba(41, 98, 255, 0.18); /* 背景色变化 */
+}
+
+/* 卡片标题样式 */
+.card-title {
+  font-size: 1.1rem; /* 字体大小 */
+  font-weight: bold; /* 字体粗细 */
+  margin-bottom: 5px; /* 下外边距 */
+  color: #aee6ff; /* 文字颜色 */
+  letter-spacing: 1px; /* 字间距 */
+}
+
+/* 卡片描述样式 */
+.card-desc {
+  font-size: 0.9rem; /* 字体大小 */
+  color: #eaf6ff; /* 文字颜色 */
+  opacity: 0.85; /* 不透明度 */
+}
+
+/* 隐藏所有滚动条 */
+::-webkit-scrollbar {
+  width: 0; /* 宽度为0 */
+  height: 0; /* 高度为0 */
+  background: transparent; /* 背景透明 */
+}
+
+/* Firefox 滚动条 */
+* {
+  scrollbar-width: none; /* 隐藏滚动条 */
+}
+
+/* IE 滚动条 */
+* {
+  -ms-overflow-style: none; /* 隐藏滚动条 */
+}
+
+/* 返回按钮样式 */
+.back-btn {
+  display: inline-block; /* 行内块元素 */
+  margin-bottom: 10px; /* 下外边距 */
+  padding: 6px 18px; /* 内边距 */
+  background: rgba(41, 98, 255, 0.13); /* 半透明背景色 */
+  color: #aee6ff; /* 文字颜色 */
+  border-radius: 8px; /* 圆角设置 */
+  text-decoration: none; /* 去除链接下划线 */
+  font-size: 1rem; /* 字体大小 */
+  font-weight: 500; /* 字体粗细 */
+  letter-spacing: 1px; /* 字间距 */
+  transition: background 0.2s, color 0.2s; /* 动效 */
+}
+
+/* 返回按钮悬停效果 */
+.back-btn:hover {
+  background: #1976d2; /* 背景色变化 */
+  color: #fff; /* 文字颜色变化 */
+}
+
+/* 饼图样式 */
+#pie-chart svg {
+  display: block; /* 块级元素 */
+  margin: 0 auto; /* 水平居中 */
+  background: rgba(255,255,255,0.03); /* 背景色 */
+  border-radius: 18px; /* 圆角设置 */
+  box-shadow: 0 2px 12px 0 rgba(31, 38, 135, 0.10); /* 阴影效果 */
+}
+
+/* 音乐播放器按钮样式 */
+#music-player-ui button {
+  background: #1976d2; /* 背景色 */
+  color: #fff; /* 文字颜色 */
+  border: none; /* 无边框 */
+  border-radius: 6px; /* 圆角设置 */
+  padding: 6px 18px; /* 内边距 */
+  font-size: 1rem; /* 字体大小 */
+  font-weight: 500; /* 字体粗细 */
+  cursor: pointer; /* 鼠标指针样式 */
+  margin-right: 8px; /* 右外边距 */
+  transition: background 0.2s; /* 动效 */
+}
+
+/* 音乐播放器按钮悬停效果 */
+#music-player-ui button:hover {
+  background: #1565c0; /* 背景色变化 */
+}
+
+/* 图表区域样式 */
+#charts-area {
+  display: flex; /* 使用弹性布局 */
+  flex-direction: row; /* 主轴方向为横向 */
+  justify-content: center; /* 居中对齐 */
+  gap: 30px; /* 子元素间距 */
+  max-width: 100vw; /* 最大宽度为视口宽度 */
+  overflow: visible; /* 显示溢出内容 */
+  padding: 20px 0; /* 内边距 */
+}
+
+/* 饼图页面图表区域样式 */
+body.page-pie #charts-area {
+  margin-top: 20px; /* 上外边距 */
+  margin-bottom: 40px; /* 下外边距 */
+}
+
+/* 饼图和柱状图样式 */
+body.page-pie #pie-chart, 
+body.page-pie #bar-chart {
+  display: block; /* 块级元素 */
+  position: relative; /* 相对定位 */
+  background: rgba(255,255,255,0.05); /* 背景色 */
+  border-radius: 18px; /* 圆角设置 */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1); /* 阴影效果 */
+  overflow: visible; /* 显示溢出内容 */
+  z-index: 10; /* 层级设置 */
+}
+
+/* 饼图SVG样式 */
+body.page-pie #pie-chart svg {
+  width: 600px !important; /* 饼图宽度 */
+  height: 600px !important; /* 饼图高度 */
+  display: block; /* 块级元素 */
+  margin: 0 auto; /* 水平居中 */
+  background: none; /* 无背景 */
+  border-radius: 0; /* 无圆角 */
+  box-shadow: none; /* 无阴影 */
+  overflow: visible; /* 显示溢出内容 */
+}
+
+/* 柱状图SVG样式 */
+body.page-pie #bar-chart svg {
+  width: 500px !important; /* 柱状图宽度 */
+  height: 400px !important; /* 柱状图高度 */
+  display: block; /* 块级元素 */
+  margin: 0 auto; /* 水平居中 */
+  background: none; /* 无背景 */
+  border-radius: 0; /* 无圆角 */
+  box-shadow: none; /* 无阴影 */
+  overflow: visible; /* 显示溢出内容 */
+}
+
+/* 柱状图X轴标签样式 */
+.bar-x-label-multiline tspan {
+  font-size: 0.95rem; /* 字体大小 */
+  fill: #eaf6ff; /* 填充颜色 */
+}
+
+/* 响应式布局：最大宽度1200px时 */
+@media (max-width: 1200px) {
+  /* 在屏幕宽度小于1200px时应用的样式 */
+  body.page-pie #charts-area {
+    flex-direction: column; /* 改为纵向排列 */
+    align-items: center; /* 水平居中对齐 */
+  }
+  body.page-pie #pie-chart, body.page-pie #bar-chart {
+    margin-bottom: 20px; /* 下方间距 */
+  }
+  body.page-pie #pie-chart svg {
+    width: 500px !important; /* 饼图宽度 */
+    height: 450px !important; /* 饼图高度 */
+  }
+  body.page-pie #bar-chart svg {
+    width: 500px !important; /* 柱状图宽度 */
+    height: 450px !important; /* 柱状图高度 */
+  }
+}
+
+/* 响应式布局：最大宽度900px时 */
+@media (max-width: 900px) {
+  body.page-pie #charts-area {
+    flex-direction: column; /* 改为纵向排列 */
+    align-items: center; /* 水平居中对齐 */
+    padding: 10px; /* 内边距 */
+  }
+  body.page-pie #pie-chart svg, body.page-pie #bar-chart svg {
+    width: 90vw !important; /* 宽度90%视口宽度 */
+    height: 420px !important; /* 高度420px */
+  }
+}
+
+/* 页面过渡动画 */
+#spa-content {
+  position: relative; /* 相对定位 */
+  width: 100%; /* 宽度100% */
+  min-height: 100vh; /* 最小高度为视口高度 */
+  max-width: 100vw; /* 最大宽度为视口宽度 */
+  overflow-x: hidden; /* 隐藏横向滚动条 */
+}
+
+/* 首页过渡样式 */
+body.page-home #spa-content {
+  height: 100vh; /* 高度为视口高度 */
+  overflow: hidden; /* 隐藏所有滚动条 */
+}
+
+/* 饼图页面过渡样式 */
+body.page-pie #spa-content {
+  overflow: visible; /* 显示溢出内容 */
+}
+
+/* 地图页面过渡样式 */
+body.page-map #spa-content {
+  overflow: visible; /* 显示溢出内容 */
+}
+
+/* 关系图页面过渡样式 */
+body.page-relation #spa-content {
+  overflow: visible; /* 显示溢出内容 */
+}
+
+/* 音乐页面过渡样式 */
+body.page-music #spa-content {
+  overflow: visible; /* 显示溢出内容 */
+}
+
+/* 页面容器样式 */
+.page-container {
+  position: absolute; /* 绝对定位 */
+  width: 100%; /* 宽度100% */
+  min-height: 100vh; /* 最小高度为视口高度 */
+  max-width: 100vw; /* 最大宽度为视口宽度 */
+  overflow-x: hidden; /* 隐藏横向滚动条 */
+  transition: all 0.6s ease-in-out; /* 动效 */
+  transform-origin: center; /* 变换原点为中心 */
+  backface-visibility: hidden; /* 隐藏背面 */
+  will-change: transform, opacity; /* 提前告知将要发生的变化 */
+}
+
+/* 首页页面容器样式 */
+body.page-home .page-container {
+  height: 100vh; /* 高度为视口高度 */
+  overflow: hidden; /* 隐藏所有滚动条 */
+}
+
+/* 饼图页面容器样式 */
+body.page-pie .page-container {
+  overflow: visible; /* 显示溢出内容 */
+}
+
+/* 地图页面容器样式 */
+body.page-map .page-container {
+  overflow: visible; /* 显示溢出内容 */
+}
+
+/* 关系图页面容器样式 */
+body.page-relation .page-container {
+  overflow: visible; /* 显示溢出内容 */
+}
+
+/* 音乐页面容器样式 */
+body.page-music .page-container {
+  overflow: visible; /* 显示溢出内容 */
+}
+
+/* 当前页面样式 */
+.page-container.current {
+  transform: translateX(0); /* 位置复位 */
+  opacity: 1; /* 不透明度为1 */
+  z-index: 2; /* 层级设置 */
+}
+
+/* 下一页样式 */
+.page-container.next {
+  transform: translateX(100%); /* 向右移动100% */
+  opacity: 0; /* 不透明度为0 */
+  z-index: 1; /* 层级设置 */
+}
+
+/* 上一页样式 */
+.page-container.prev {
+  transform: translateX(-100%); /* 向左移动100% */
+  opacity: 0; /* 不透明度为0 */
+  z-index: 1; /* 层级设置 */
+}
+
+/* 页面过渡层样式 */
+.page-transition {
+  position: fixed; /* 固定定位 */
+  top: 0; /* 顶部对齐 */
+  left: 0; /* 左侧对齐 */
+  width: 100%; /* 宽度100% */
+  height: 100%; /* 高度100% */
+  background: rgba(0, 0, 0, 0.2); /* 半透明背景色 */
+  pointer-events: none; /* 禁用鼠标事件 */
+  opacity: 0; /* 不透明度为0 */
+  transition: opacity 0.3s; /* 动效 */
+  z-index: 9998; /* 层级设置 */
+}
+
+/* 页面过渡层激活状态 */
+.page-transition.active {
+  opacity: 1; /* 不透明度为1 */
+}
+
+/* 确保提示框显示在最上层 */
+.tooltip {
+  position: absolute; /* 绝对定位 */
+  background-color: rgba(0, 0, 0, 0.8); /* 背景色 */
+  color: white; /* 文字颜色 */
+  padding: 8px; /* 内边距 */
+  border-radius: 4px; /* 圆角设置 */
+  font-size: 14px; /* 字体大小 */
+  pointer-events: none; /* 禁用鼠标事件 */
+  z-index: 10000; /* 确保提示框在所有元素上面 */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+  max-width: 200px; /* 最大宽度 */
+  white-space: nowrap; /* 不换行 */
+}
+
+/* 音频可视化器样式 */
+.mini-visualizer {
+    position: fixed; /* 固定定位 */
+    top: 0; /* 顶部对齐 */
+    left: 0; /* 左侧对齐 */
+    width: 100%; /* 宽度100% */
+    height: 45px; /* 设置高度 */
+    z-index: 1000; /* 层级设置 */
+    pointer-events: none; /* 禁用鼠标事件 */
+    /* 背景渐变效果 */
+    background: linear-gradient(to bottom, 
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0.2) 50%,
+        transparent 100%
+    );
+    backdrop-filter: blur(8px); /* 背景模糊效果 */
+    -webkit-backdrop-filter: blur(8px); /* Safari浏览器背景模糊效果 */
+}
+
+/* 音频可视化器Canvas样式 */
+.mini-visualizer canvas {
+    width: 100%; /* 宽度100% */
+    height: 100%; /* 高度100% */
+    filter: drop-shadow(0 0 3px rgba(41, 98, 255, 0.3)); /* 添加发光效果 */
+}
+
+/* 移动设备响应式布局 */
+@media (max-width: 600px) {
+  body.page-home {
+    font-size: 12px; /* 减小字体大小 */
+  }
+  body.page-home .container {
+    padding: 10px 2px; /* 调整内边距 */
+  }
+  body.page-home .profile-card {
+    flex-direction: column; /* 改为纵向排列 */
+    gap: 16px; /* 元素间距 */
+    padding: 18px 8px; /* 内边距 */
+  }
+  .avatar {
+    width: 80px; /* 头像宽度 */
+    height: 80px; /* 头像高度 */
+  }
+  body.page-home .section-card {
+    padding: 12px 6px; /* 卡片内边距 */
+  }
+  .card-grid {
+    grid-template-columns: 1fr; /* 改为单列布局 */
+    gap: 3px; /* 网格间距 */
+  }
+  .module-card {
+    padding: 10px 8px 8px 8px; /* 模块卡片内边距 */
+  }
+}

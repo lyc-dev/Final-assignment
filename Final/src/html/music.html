@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐可视化</title>
+    <link rel="stylesheet" href="src/styles/style.css">
+    <link rel="stylesheet" href="src/styles/music-page.css">
+    <!-- AudioContext 和音频可视化相关依赖 -->
+    <script src="src/audio/music-viz.js"></script>
+</head>
+<body>
+    <section class="section-card glass" style="margin-bottom:21px;">
+        <a href="#home" class="back-btn" style="margin-top: 35px;">← 返回首页</a>
+        <h2 style="text-align: center;">音乐可视化</h2>
+    </section>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <button type="button" class="nav-button" id="prev-btn" title="切换到专辑视图">←</button>
+        <button type="button" class="nav-button" id="next-btn" title="切换到专辑视图">→</button>
+    </div>
+    
+    <!-- 音频可视化容器 - 确保初始显示状态 -->
+    <div id="visualization-container" class="showing"></div>
+    
+    <!-- 专辑封面和歌词容器 - 设置为初始隐藏 -->
+    <div id="album-container">
+        <div class="album-content-grid">  <!-- 新增一个容器用于Flexbox/Grid布局 -->
+            <div class="album-left">      <!-- 左侧容器 -->
+                <div class="album-cover-container">
+                    <img id="album-cover" class="album-cover" src="" alt="专辑封面">
+                    <canvas id="album-viz-canvas" class="album-viz-canvas"></canvas>
+                    <div class="album-glow"></div>
+                </div>
+            </div>
+            <div class="album-right">     <!-- 右侧容器 -->
+                <div class="song-info">
+                    <h3 id="song-title"></h3>
+                    <p id="song-artist"></p>
+                </div>
+                <div class="lyrics-container" id="lyrics-container">
+                    <!-- 歌词将被动态添加 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="src/utils/music-view-controller.js"></script>
+    
+    <!-- 初始化按钮响应能力 -->
+    <script>
+        // 确保DOM加载完成后立即初始化按钮事件
+        document.addEventListener('DOMContentLoaded', function() {
+            // 确保按钮能够被点击，防止第一次点击无响应
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            if (prevBtn && nextBtn) {
+                // 添加临时点击处理，确保第一次点击也能响应
+                const tempClickHandler = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('初始化点击处理');
+                    
+                    // 若window.toggleView已存在，则调用它
+                    if (typeof window.toggleView === 'function') {
+                        window.toggleView();
+                    } else {
+                        console.log('等待视图切换功能初始化');
+                        // 尝试再次加载music-view-controller.js
+                        const script = document.createElement('script');
+                        script.type = 'module';
+                        script.src = 'src/utils/music-view-controller.js';
+                        document.body.appendChild(script);
+                    }
+                    
+                    // 移除临时处理器，防止重复执行
+                    prevBtn.removeEventListener('click', tempClickHandler);
+                    nextBtn.removeEventListener('click', tempClickHandler);
+                };
+                
+                // 添加临时处理器
+                prevBtn.addEventListener('click', tempClickHandler);
+                nextBtn.addEventListener('click', tempClickHandler);
+            }
+        });
+    </script>
+</body>
+</html>
